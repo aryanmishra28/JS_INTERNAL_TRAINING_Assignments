@@ -1,7 +1,3 @@
-// =========================
-// Part A: Basic
-// =========================
-
 // 1. Sum of two numbers
 let a = 10, b = 20;
 console.log("1. Sum:", a + b);
@@ -81,4 +77,5 @@ console.log("14. Factorial:", factorial(5));
 function canVote(age) {
   return age >= 18 ? "Eligible" : "Not Eligible";
 }
+
 console.log("15.", canVote(20));
