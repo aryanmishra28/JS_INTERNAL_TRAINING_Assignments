@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DOM & Events - Day 4</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    button {
+      margin: 5px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+    .box {
+      border: 1px solid black;
+      padding: 10px;
+      background: #f0f0f0;
+      margin-top: 10px;
+    }
+    .dark {
+      background: #222;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Task 1 -->
+  <h3>Task 1: Change Text</h3>
+  <p id="text">Click the button</p>
+  <button onclick="changeText()">Click Me</button>
+
+  <!-- Task 2 -->
+  <h3>Task 2: Background Color Changer</h3>
+  <button onclick="changeBg('red')">Red</button>
+  <button onclick="changeBg('blue')">Blue</button>
+  <button onclick="changeBg('green')">Green</button>
+
+  <!-- Task 3 -->
+  <h3>Task 3: Image Switcher</h3>
+  <img id="img" src="https://via.placeholder.com/150" />
+  <br>
+  <button onclick="prevImg()">Previous</button>
+  <button onclick="nextImg()">Next</button>
+
+  <!-- Task 4 -->
+  <h3>Task 4: Show / Hide Paragraph</h3>
+  <p id="para">This paragraph can be hidden</p>
+  <button onclick="togglePara()">Show / Hide</button>
+
+  <!-- Task 5 -->
+  <h3>Task 5: Counter App</h3>
+  <button onclick="decrease()">-</button>
+  <span id="count">0</span>
+  <button onclick="increase()">+</button>
+
+  <!-- Task 6 -->
+  <h3>Task 6: Create Element</h3>
+  <button onclick="addBox()">Add Box</button>
+
+  <!-- Task 7 -->
+  <h3>Task 7: Form Input Reader</h3>
+  <input type="text" id="username" placeholder="Enter name" />
+  <button onclick="showName()">Submit</button>
+  <p id="output"></p>
+
+  <!-- Task 8 -->
+  <h3>Task 8: Todo List</h3>
+  <input type="text" id="taskInput" placeholder="Add task" />
+  <button onclick="addTask()">Add</button>
+  <ul id="taskList"></ul>
+
+  <!-- Task 9 -->
+  <h3>Task 9: Attribute Change</h3>
+  <img id="imgSize" src="https://via.placeholder.com/100" />
+  <br>
+  <button onclick="smallImg()">Small</button>
+  <button onclick="largeImg()">Large</button>
+
+  <!-- Task 10 -->
+  <h3>Task 10: Theme Switcher</h3>
+  <button onclick="toggleTheme()">Toggle Theme</button>
+
+  <!-- Task 11 -->
+  <h3>Task 11: Live Clock</h3>
+  <p id="clock"></p>
+
+  <!-- Task 12 -->
+  <h3>Task 12: Random Quote</h3>
+  <p id="quote"></p>
+  <button onclick="newQuote()">New Quote</button>
+
+<script>
+  // Task 1
+  function changeText() {
+    document.getElementById("text").innerText = "Welcome to JavaScript!";
+  }
+
+  // Task 2
+  function changeBg(color) {
+    document.body.style.backgroundColor = color;
+  }
+
+  // Task 3
+  let images = [
+    "https://via.placeholder.com/150",
+    "https://via.placeholder.com/150/0000FF"
+  ];
+  let index = 0;
+  function nextImg() {
+    index = (index + 1) % images.length;
+    img.src = images[index];
+  }
+  function prevImg() {
+    index = (index - 1 + images.length) % images.length;
+    img.src = images[index];
+  }
+
+  // Task 4
+  function togglePara() {
+    let p = document.getElementById("para");
+    p.style.display = p.style.display === "none" ? "block" : "none";
+  }
+
+  // Task 5
+  let count = 0;
+  function increase() {
+    count++;
+    document.getElementById("count").innerText = count;
+  }
+  function decrease() {
+    if (count > 0) count--;
+    document.getElementById("count").innerText = count;
+  }
+
+  // Task 6
+  function addBox() {
+    let div = document.createElement("div");
+    div.className = "box";
+    div.innerText = "New Box Created";
+    document.body.appendChild(div);
+  }
+
+  // Task 7
+  function showName() {
+    let name = document.getElementById("username").value;
+    document.getElementById("output").innerText = "Hello " + name;
+  }
+
+  // Task 8
+  function addTask() {
+    let task = document.getElementById("taskInput").value;
+    if (task === "") return;
+    let li = document.createElement("li");
+    li.innerText = task;
+    document.getElementById("taskList").appendChild(li);
+    document.getElementById("taskInput").value = "";
+  }
+
+  // Task 9
+  function smallImg() {
+    imgSize.setAttribute("width", "100");
+  }
+  function largeImg() {
+    imgSize.setAttribute("width", "200");
+  }
+
+  // Task 10
+  function toggleTheme() {
+    document.body.classList.toggle("dark");
+  }
+
+  // Task 11
+  setInterval(() => {
+    document.getElementById("clock").innerText =
+      new Date().toLocaleTimeString();
+  }, 1000);
+
+  // Task 12
+  let quotes = [
+    "Learn JavaScript",
+    "Practice makes perfect",
+    "Keep coding"
+  ];
+  function newQuote() {
+    let q = quotes[Math.floor(Math.random() * quotes.length)];
+    document.getElementById("quote").innerText = q;
+  }
+</script>
+
+</body>
+</html>
