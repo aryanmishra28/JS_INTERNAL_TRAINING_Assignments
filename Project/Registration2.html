@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Registration Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ==============================
+   INNOVATIVE THEME VARS
+================================ */
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --text-color: #ffffff;
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-focus: rgba(255, 255, 255, 0.25);
+  --accent-color: #00d2ff;
+}
+
+/* ==============================
+   BASE
+================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  /* Deep, vibrant animated background */
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ==============================
+   GLASS CARD CONTAINER
+================================ */
+.container {
+  width: 420px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: var(--glass-border);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: var(--glass-shadow);
+  animation: floatIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==============================
+   HEADING
+================================ */
+.container h2 {
+  text-align: center;
+  margin: 0 0 30px 0;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* ==============================
+   FORM ELEMENTS
+================================ */
+label {
+  display: block;
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+  width: 100%;
+  margin-top: 8px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--input-bg);
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  color: #fff;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* Remove default select arrow and add custom style */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px top 50%;
+  background-size: 12px auto;
+}
+
+select option {
+  background: #333; /* Dark background for dropdown options */
+  color: #fff;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+input:focus,
+select:focus {
+  background: var(--input-focus);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+}
+
+/* ==============================
+   STYLED RADIO BUTTONS
+================================ */
+.gender {
+  display: flex;
+  gap: 15px;
+  margin-top: 8px;
+}
+
+/* Hide default radio */
+.gender input[type="radio"] {
+  display: none;
+}
+
+/* Custom Radio "Chip" */
+.gender label {
+  margin-top: 0;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  cursor: pointer;
+  text-transform: none;
+  font-weight: 400;
+  color: #fff;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.gender label:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Style when the radio inside the label is checked */
+/* We use the :has() selector or adjacent logic. 
+   Since the structure is <label><input> text</label>, we rely on a neat trick 
+   OR use CSS :has() which works in most modern browsers. */
+.gender label:has(input:checked) {
+  background: var(--accent-color);
+  color: #000;
+  font-weight: 600;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+  border-color: transparent;
+}
+
+/* Fallback for older browsers if :has isn't supported */
+@supports not selector(:has(input:checked)) {
+  .gender input[type="radio"]:checked + span {
+     /* This would require changing HTML structure. 
+        Current solution relies on modern browser :has support */
+  }
+}
+
+/* ==============================
+   CHECKBOX (Neon Style)
+================================ */
+.terms {
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.terms label {
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-transform: none;
+  font-size: 14px;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 5px;
+  margin-right: 10px;
+  display: grid;
+  place-content: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  transform: scale(0);
+  background-color: var(--accent-color);
+  border-radius: 2px;
+  transition: 0.2s transform ease-in-out;
+  box-shadow: 0 0 10px var(--accent-color);
+}
+
+input[type="checkbox"]:checked {
+  border-color: var(--accent-color);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+/* ==============================
+   BUTTON
+================================ */
+button {
+  width: 100%;
+  margin-top: 35px;
+  padding: 15px;
+  border-radius: 50px; /* Pill shape */
+  border: none;
+  background: #fff;
+  color: #333;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background: var(--accent-color);
+  color: #fff;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.6);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* ==============================
+   ERROR & SUCCESS
+================================ */
+.error {
+  margin-top: 15px;
+  text-align: center;
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  text-shadow: 0 0 5px rgba(0,0,0,0.2);
+  min-height: 20px;
+}
+
+.success {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(46, 213, 115, 0.2);
+  border: 1px solid rgba(46, 213, 115, 0.4);
+  color: #2ed573;
+  font-weight: 600;
+  text-align: center;
+  animation: popIn 0.5s ease;
+}
+
+.output {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  font-size: 14px;
+  color: #ddd;
+  line-height: 1.6;
+}
+
+.output strong {
+  color: var(--accent-color);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ==============================
+   MOBILE
+================================ */
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+    padding: 25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Registration</h2>
+
+  <form id="form">
+    <label>Full Name</label>
+    <input type="text" id="name" placeholder="John Doe">
+
+    <label>Email Address</label>
+    <input type="email" id="email" placeholder="john@example.com">
+
+    <label>Gender</label>
+    <div class="gender">
+      <label><input type="radio" name="gender" value="Male"> Male</label>
+      <label><input type="radio" name="gender" value="Female"> Female</label>
+    </div>
+
+    <label>Selected Course</label>
+    <select id="course">
+      <option value="">Choose a path...</option>
+      <option>JavaScript Mastery</option>
+      <option>Python Data Science</option>
+      <option>Java Enterprise</option>
+    </select>
+
+    <div class="terms">
+      <label>
+        <input type="checkbox" id="terms">
+        <span>I agree to Terms & Conditions</span>
+      </label>
+    </div>
+
+    <button type="submit">Submit</button>
+
+    <div id="error" class="error"></div>
+  </form>
+
+  <div id="result"></div>
+</div>
+
+<script>
+const form = document.getElementById("form");
+const error = document.getElementById("error");
+const result = document.getElementById("result");
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+
+  const name = form.name.value.trim();
+  const email = form.email.value.trim();
+  const course = form.course.value;
+  const gender = document.querySelector("input[name='gender']:checked");
+  const terms = document.getElementById("terms").checked;
+
+  error.textContent = "";
+  result.innerHTML = "";
+
+  // Shake animation for error logic
+  function triggerError(msg) {
+      error.textContent = msg;
+      form.style.animation = "shake 0.4s ease";
+      setTimeout(() => form.style.animation = "", 400);
+  }
+
+  if (!name) return triggerError("Please enter your name");
+  if (!email) return triggerError("Please enter a valid email");
+  if (!gender) return triggerError("Please select gender");
+  if (!course) return triggerError("Please select a course");
+  if (!terms) return triggerError("Please accept terms and conditions");
+
+  result.innerHTML = `
+    <div class="success">Registration Successful!</div>
+    <div class="output">
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Gender:</strong> ${gender.value}</p>
+      <p><strong>Course:</strong> ${course}</p>
+    </div>
+  `;
+
+  form.reset();
+});
+</script>
+
+<style>
+/* Adding the shake animation for JS interaction */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+</style>
+
+</body>
+</html>
