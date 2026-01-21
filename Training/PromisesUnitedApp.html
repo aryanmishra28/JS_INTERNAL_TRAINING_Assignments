@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>United University – Promise Example</title>
+</head>
+<body>
+
+<script>
+/****************************************************
+ * UNITED UNIVERSITY
+ * Student Course Enrollment System
+ * ES6 Promises – Complete Single File Example
+ ****************************************************/
+
+/* 1. Student Authentication */
+function authenticateStudent(studentId) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            studentId
+                ? resolve({ studentId, status: "Authenticated" })
+                : reject("United University: Authentication Failed");
+        }, 300);
+    });
+}
+
+/* 2. Course Availability Check */
+function checkCourseAvailability(courseCode) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            courseCode === "UU-FS-101"
+                ? resolve({ courseCode, status: "Seats Available" })
+                : reject("United University: Course Not Available");
+        }, 300);
+    });
+}
+
+/* 3. Prerequisite Validation */
+function validatePrerequisites(studentId, courseCode) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({
+                studentId,
+                courseCode,
+                status: "Prerequisites Cleared"
+            });
+        }, 300);
+    });
+}
+
+/* 4. Student Enrollment */
+function enrollStudent(studentId, courseCode) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({
+                enrollmentId: "UU-ENR-2026-001",
+                studentId,
+                courseCode,
+                status: "Enrollment Successful"
+            });
+        }, 300);
+    });
+}
+
+/* 5. Fee Payment Processing */
+function processFeePayment(amount) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            amount > 0
+                ? resolve({ amount, status: `Rs. ${amount} Fee Paid` })
+                : reject("United University: Payment Failed");
+        }, 300);
+    });
+}
+
+/* 6. Enrollment Confirmation */
+function generateEnrollmentConfirmation(enrollmentId) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({
+                enrollmentId,
+                status: "Enrollment Confirmation Generated"
+            });
+        }, 300);
+    });
+}
+
+/* 7. Notification Service */
+function sendStudentNotification(studentId) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({
+                studentId,
+                status: "Email & SMS Notification Sent"
+            });
+        }, 300);
+    });
+}
+
+/****************************************************
+ * MAIN APPLICATION – PROMISE CHAINING
+ ****************************************************/
+
+const STUDENT_ID  = 1001;
+const COURSE_CODE = "UU-FS-101";
+const COURSE_FEE  = 50000;
+
+// Consuming Promises
+authenticateStudent(STUDENT_ID)
+    .then(res => {
+        console.log("✔", res.status);
+        return checkCourseAvailability(COURSE_CODE);
+    })
+    .then(res => {
+        console.log("✔", res.status);
+        return validatePrerequisites(STUDENT_ID, COURSE_CODE);
+    })
+    .then(res => {
+        console.log("✔", res.status);
+        return enrollStudent(STUDENT_ID, COURSE_CODE);
+    })
+    .then(enrollment => {
+        console.log("✔", enrollment.status);
+        return processFeePayment(COURSE_FEE)
+            .then(payment => ({ enrollment, payment }));
+    })
+    .then(result => {
+        console.log("✔", result.payment.status);
+        return generateEnrollmentConfirmation(result.enrollment.enrollmentId);
+    })
+    .then(res => {
+        console.log("✔", res.status);
+        return sendStudentNotification(STUDENT_ID);
+    })
+    .then(res => {
+        console.log("✔", res.status);
+        console.log("🎓 United University: Course Enrollment Completed Successfully");
+    })
+    .catch(error => {
+        console.error("United University Enrollment Error:", error);
+    });
+
+/****************************************************
+ * Real-life example of Promise Chaining
+ ****************************************************/
+</script>
+
+</body>
+</html>

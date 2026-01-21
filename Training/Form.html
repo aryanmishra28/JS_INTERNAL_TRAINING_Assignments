@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>College Training Feedback Form</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(#cfe9fb, #e9f6ff);
+    }
+
+    .card {
+        width: 600px;
+        margin: 40px auto;
+        background: #f8fbff;
+        border-radius: 18px;
+        padding: 30px 40px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        border: 2px solid #e1eefc;
+    }
+
+    h2 {
+        text-align: center;
+        color: #1e5fa3;
+        margin-bottom: 25px;
+    }
+
+    table {
+        width: 100%;
+        border-spacing: 10px;
+    }
+
+    td {
+        font-size: 15px;
+        color: #1e5fa3;
+        vertical-align: middle;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #bfcde0;
+        font-size: 14px;
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    input[type="radio"] {
+        width: auto;
+    }
+
+    .buttons {
+        text-align: center;
+        padding-top: 15px;
+    }
+
+    button {
+        padding: 8px 18px;
+        font-size: 14px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .submit {
+        background-color: #2a73c8;
+        color: white;
+    }
+
+    .clear {
+        background-color: #e0e0e0;
+        margin-left: 10px;
+    }
+
+    .rating {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 16px;
+        color: #1e5fa3;
+        font-weight: bold;
+        display: none;
+    }
+</style>
+
+<script>
+    function showResult() {
+        var trainer = document.getElementById("trainerName").value;
+
+        if (trainer === "") {
+            trainer = "Trainer";
+        }
+
+        document.getElementById("rating").innerHTML =
+            "Feedback rating of " + trainer + " is 5";
+
+        document.getElementById("rating").style.display = "block";
+        return false;
+    }
+
+    function clearAll() {
+        document.getElementById("rating").style.display = "none";
+        document.getElementById("rating").innerHTML = "";
+    }
+</script>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>College Training Feedback Form</h2>
+
+    <form onsubmit="return showResult()" onreset="clearAll()">
+        <table>
+            <tr>
+                <td>Participant Name:</td>
+                <td><input type="text"></td>
+            </tr>
+
+            <tr>
+                <td>College Name:</td>
+                <td><input type="text"></td>
+            </tr>
+
+            <tr>
+                <td>Participant Address:</td>
+                <td><textarea rows="3"></textarea></td>
+            </tr>
+
+            <tr>
+                <td>Gender:</td>
+                <td>
+                    <input type="radio" name="gender"> Male
+                    <input type="radio" name="gender"> Female
+                </td>
+            </tr>
+
+            <tr>
+                <td>Email ID:</td>
+                <td><input type="email"></td>
+            </tr>
+
+            <tr>
+                <td>Mobile Number:</td>
+                <td><input type="text"></td>
+            </tr>
+
+            <tr>
+                <td>Trainer's Name:</td>
+                <td><input type="text" id="trainerName"></td>
+            </tr>
+
+            <tr>
+                <td>Course Name:</td>
+                <td><input type="text"></td>
+            </tr>
+
+            <tr>
+                <td>Course Completion Date:</td>
+                <td><input type="date"></td>
+            </tr>
+
+            <tr>
+                <td>Trainer's Feedback:</td>
+                <td>
+                    <select>
+                        <option value="">Select</option>
+                        <option>Excellent</option>
+                        <option>Good</option>
+                        <option>Average</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="buttons">
+                    <button class="submit">Submit Feedback</button>
+                    <button class="clear" type="reset">Clear</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <div id="rating" class="rating"></div>
+</div>
+
+</body>
+</html>
